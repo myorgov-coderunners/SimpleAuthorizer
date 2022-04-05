@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "82ae963a-86ca-4a63-954e-cf379aff5ea4",
+		"name": "SimpleAuthorizer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create director",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"DirectorName\",\r\n    \"birthDate\": \"2022-02-23T17:48:23.744Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostname}}/api/Director",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"Director"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer {{token}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete director",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"DirectorName\",\r\n    \"birthDate\": \"2022-02-23T17:48:23.744Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostname}}/api/Director/2",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"Director",
+						"2"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer {{token}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit director",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"DirectorName2\",\r\n    \"birthDate\": \"2022-02-23T17:48:23.744Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostname}}/api/Director",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"Director"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer {{token}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Director",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{hostname}}/api/Director/3",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"Director",
+						"3"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer {{token}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Directors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostname}}/api/Director",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"Director"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer {{token}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
