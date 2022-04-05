@@ -7,5 +7,6 @@ namespace SimpleAuthorizer.API.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
+        // To do: Add Movie CRUD endpoints
     }
 }
