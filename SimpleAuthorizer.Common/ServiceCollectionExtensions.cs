@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using FluentValidation.AspNetCore;
 using SimpleAuthorizer.Common.Mappings;
+using static SimpleAuthorizer.Common.IdentityConstants;
 
 namespace SimpleAuthorizer.Common
 {
@@ -39,27 +40,35 @@ namespace SimpleAuthorizer.Common
             return services;
         }
 
-        private static IServiceCollection AddIdentity(
+        public static IServiceCollection AddJWTAuthentication(
              this IServiceCollection services,
              IConfiguration configuration)
         {
-            services.AddAuthentication(options => {
-                    options.DefaultAuthenticateScheme = "bearer";
-                    options.DefaultChallengeScheme = "bearer";
+            var key = Encoding.UTF8.GetBytes(configuration.GetValue<string>("JwtTokenSettings:Key"));
+            services
+                .AddHttpContextAccessor()
+                .AddAuthentication(authentication =>
+                {
+                    authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    authentication.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 })
-                .AddJwtBearer("bearer", options => {
-                    options.TokenValidationParameters = new TokenValidationParameters
+                .AddJwtBearer(bearer =>
+                {
+                    
+                    bearer.RequireHttpsMetadata = false;
+                    bearer.SaveToken = true;
+                    bearer.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateAudience = false,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = false,
-                        ValidateIssuerSigningKey = false,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("JwtToken:Key"))),
-                        ValidateLifetime = true,
-                        ClockSkew = TimeSpan.Zero //the default for this setting is 5 minutes
+                        ValidateAudience = false
                     };
-                    options.Events = new JwtBearerEvents
+                    bearer.Events = new JwtBearerEvents
                     {
-                        OnAuthenticationFailed = context => {
+                        OnAuthenticationFailed = context =>
+                        {
                             if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
                             {
                                 context.Response.Headers.Add("Access-Token-Expired", "true");
@@ -68,6 +77,19 @@ namespace SimpleAuthorizer.Common
                         }
                     };
                 });
+
+            services.AddAuthorization(options =>
+            {
+                foreach (var constant in typeof(CustomClaims).GetFields())
+                {
+                    var value = constant.GetValue(null) ?? "";
+                    options.AddPolicy(value.ToString()!, policy =>
+                    {
+                        policy.RequireClaim("Permission", value.ToString()!);
+                        policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                    });
+                }
+            });
 
             return services;
         }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
+using SimpleAuthorizer.Common.Services;
 
 namespace SimpleAuthorizer.Common
 {
@@ -17,12 +17,12 @@ namespace SimpleAuthorizer.Common
 
             db.Database.Migrate();
 
-            //var seeders = serviceProvider.GetServices<IDataSeeder>();
+            var seeders = serviceProvider.GetServices<IDataSeeder>();
 
-            //foreach (var seeder in seeders)
-            //{
-            //    seeder.SeedData();
-            //}
+            foreach (var seeder in seeders)
+            {
+                seeder.SeedData();
+            }
             return app;
         }
     }

@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using SimpleAuthorizer.Common;
+using SimpleAuthorizer.Common.Services;
+using SimpleAuthorizer.Identity;
 using SimpleAuthorizer.Identity.Infrastructure;
 using SimpleAuthorizer.Identity.Services;
 using System.Reflection;
@@ -9,12 +12,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDatabase<SimpleIdentityDbContext>(builder.Configuration);
-builder.Services.AddApplication(Assembly.GetExecutingAssembly());
-builder.Services.AddTransient<IIdentityService, IdentityService>();
+builder.Services
+    .Configure<IdentitySettings>(builder.Configuration.GetSection(nameof(IdentitySettings)))
+    .Configure<JwtTokenSettings>(options => builder.Configuration.GetSection("JwtTokenSettings").Bind(options));
 
-builder.Services.Configure<JwtTokenSettings>(
-    options => builder.Configuration.GetSection("JwtToken").Bind(options));
+builder.Services
+    .AddTransient<IDataSeeder, IdentityDataSeeder>()
+    .AddTransient<IIdentityService, IdentityService>()
+    .AddDatabase<SimpleIdentityDbContext>(builder.Configuration)
+    .AddApplication(Assembly.GetExecutingAssembly())
+    .AddJWTAuthentication(builder.Configuration);
+
+builder.Services
+    .AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<SimpleIdentityDbContext>();
 
 var app = builder.Build();
 
@@ -25,6 +36,7 @@ app.Initialize();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

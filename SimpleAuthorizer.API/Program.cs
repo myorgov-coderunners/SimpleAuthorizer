@@ -10,6 +10,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddDatabase<ApiDbContext>(builder.Configuration);
 builder.Services.AddApplication(Assembly.GetExecutingAssembly());
+builder.Services.AddJWTAuthentication(builder.Configuration);
 
 var app = builder.Build();
 

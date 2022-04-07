@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SimpleAuthorizer.Identity.Infrastructure.Models;
 using System.Reflection;
 
 namespace SimpleAuthorizer.Identity.Infrastructure
 {
-    public class SimpleIdentityDbContext : IdentityDbContext<User>
+    public class SimpleIdentityDbContext : IdentityDbContext<IdentityUser>
     {
         public SimpleIdentityDbContext(DbContextOptions<SimpleIdentityDbContext> options)
             : base(options)
