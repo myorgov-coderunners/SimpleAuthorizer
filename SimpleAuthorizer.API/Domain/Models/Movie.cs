@@ -1,4 +1,4 @@
-﻿using SimpleAuthorizer.Common.Domain;
+﻿using SimpleAuthorizer.Common.Models;
 
 namespace SimpleAuthorizer.API.Domain.Models
 {
@@ -16,17 +16,42 @@ namespace SimpleAuthorizer.API.Domain.Models
             this.Director = director;
         }
 
-        public Movie()
+        private Movie()
         {
             this.Title = default!;
             this.Director= default!;
         }
-        public string Title { get; set; }
+        public string Title { get; private set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; private set; }
 
-        public RatingEnum Rating { get; set; }
+        public RatingEnum Rating { get; private set; }
 
-        public Director Director { get; set; }
+        public Director Director { get; private set; }
+
+        public Movie UpdateTitle(string title)
+        {
+            this.Title = title;
+            return this;
+        }
+
+        public Movie UpdateReleaseDate(DateTime date)
+        {
+            this.ReleaseDate = date;
+            return this; 
+        }
+
+        public Movie UpdateRating(RatingEnum rating)
+        {
+            this.Rating = rating;
+            return this;
+        }
+
+        public Movie UpdateDirector(Director director)
+        {
+            this.Director = director;
+            return this;
+        }
+
     }
 }

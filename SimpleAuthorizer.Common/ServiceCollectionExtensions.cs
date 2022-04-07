@@ -3,10 +3,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using MediatR;
-using FluentValidation;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using FluentValidation.AspNetCore;
+using SimpleAuthorizer.Common.Mappings;
 
 namespace SimpleAuthorizer.Common
 {
@@ -26,8 +27,13 @@ namespace SimpleAuthorizer.Common
             this IServiceCollection services,
             Assembly assembly)
         {
-            //services.AddAutoMapper(assembly);
-            services.AddValidatorsFromAssembly(assembly);
+            services.AddAutoMapper(
+                    (_, config) => config
+                        .AddProfile(new MappingProfile(assembly)),
+                    Array.Empty<Assembly>());
+
+            services.AddFluentValidation(validation => validation
+                    .RegisterValidatorsFromAssembly(assembly));
             services.AddMediatR(assembly);
 
             return services;

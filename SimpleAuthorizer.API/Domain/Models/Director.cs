@@ -1,4 +1,4 @@
-﻿using SimpleAuthorizer.Common.Domain;
+﻿using SimpleAuthorizer.Common.Models;
 
 namespace SimpleAuthorizer.API.Domain.Models
 {
@@ -6,13 +6,6 @@ namespace SimpleAuthorizer.API.Domain.Models
     {
         private readonly HashSet<Movie> _movies = new HashSet<Movie>();
 
-        public Director(
-            string name,
-            DateTime birthDate,
-            IEnumerable<Movie> movies) : this(name, birthDate)
-        {
-            this._movies = movies.ToHashSet();
-        }
         public Director(
             string name, 
             DateTime birthDate)
