@@ -6,185 +6,576 @@
 	},
 	"item": [
 		{
-			"name": "Create director",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"DirectorName\",\r\n    \"birthDate\": \"2022-02-23T17:48:23.744Z\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Director",
+			"item": [
+				{
+					"name": "Create director",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"DirectorName\",\r\n    \"birthDate\": \"2022-02-23T17:48:23.744Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Director",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Director"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{hostname}}/api/Director",
-					"host": [
-						"{{hostname}}"
-					],
-					"path": [
-						"api",
-						"Director"
-					],
-					"query": [
-						{
-							"key": "Authorization",
-							"value": "Bearer {{token}}",
-							"disabled": true
+				{
+					"name": "Edit director",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"DirectorName2\",\r\n    \"birthDate\": \"2022-02-23T17:48:23.744Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Director",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Director"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Delete director",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"DirectorName\",\r\n    \"birthDate\": \"2022-02-23T17:48:23.744Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Director/2",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Director",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Director",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/api/Director/2",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Director",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Directors",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Director",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Director"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Delete director",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"DirectorName\",\r\n    \"birthDate\": \"2022-02-23T17:48:23.744Z\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Movie",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Movie 2\",\r\n    \"releaseDate\": \"2022-02-23T17:48:23.744Z\",\r\n    \"rating\" : 8,\r\n    \"directorId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Movie",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Movie"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{hostname}}/api/Director/2",
-					"host": [
-						"{{hostname}}"
-					],
-					"path": [
-						"api",
-						"Director",
-						"2"
-					],
-					"query": [
-						{
-							"key": "Authorization",
-							"value": "Bearer {{token}}",
-							"disabled": true
+				{
+					"name": "Edit",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 7,\r\n    \"title\": \"Movie 2\",\r\n    \"releaseDate\": \"2022-02-23T17:48:23.744Z\",\r\n    \"rating\" : 4,\r\n    \"directorId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Movie",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Movie"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"DirectorName\",\r\n    \"releaseDate\": \"2022-02-23T17:48:23.744Z\",\r\n    \"rating\" : 11,\r\n    \"directorId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Movie/1",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Movie",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/api/Movie/3",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Movie",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{hostname}}/api/Movie",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Movie"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Edit director",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"DirectorName2\",\r\n    \"birthDate\": \"2022-02-23T17:48:23.744Z\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Identity",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"VeryStr0ngP@ssword2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Identity/login",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Identity",
+								"login"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer {{token}}",
+									"disabled": true
+								}
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{hostname}}/api/Director",
-					"host": [
-						"{{hostname}}"
-					],
-					"path": [
-						"api",
-						"Director"
-					],
-					"query": [
-						{
-							"key": "Authorization",
-							"value": "Bearer {{token}}",
-							"disabled": true
+				{
+					"name": "Create user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"VeryStr0ngP@ssword1\",\r\n    \"Roles\": [\"CODE_CHALLENGE_READ\", \"CODE_CHALLENGE_WRITE\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Identity/CreateUser",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Identity",
+								"CreateUser"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Create Role",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roleName\": \"NewCustomRole2\",\r\n    \"permissions\": [\"Admin\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Identity/CreateRole",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Identity",
+								"CreateRole"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit user roles",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserId\": \"60e12486-0e98-4cf6-b460-aa5af9b1388d\",\r\n    \"Roles\": [\"CODE_CHALLENGE_READ\", \"CODE_CHALLENGE_WRITE\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Identity/EditUserRoles",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Identity",
+								"EditUserRoles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"VeryStr0ngP@ssword1\",\r\n    \"Roles\": [\"CODE_CHALLENGE_READ\", \"CODE_CHALLENGE_WRITE\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Identity/ListUsers",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Identity",
+								"ListUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Permissions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"VeryStr0ngP@ssword1\",\r\n    \"Roles\": [\"CODE_CHALLENGE_READ\", \"CODE_CHALLENGE_WRITE\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/api/Identity/ListPermissions",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"api",
+								"Identity",
+								"ListPermissions"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Director",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{hostname}}/api/Director/3",
-					"host": [
-						"{{hostname}}"
-					],
-					"path": [
-						"api",
-						"Director",
-						"3"
-					],
-					"query": [
-						{
-							"key": "Authorization",
-							"value": "Bearer {{token}}",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "List Directors",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{hostname}}/api/Director",
-					"host": [
-						"{{hostname}}"
-					],
-					"path": [
-						"api",
-						"Director"
-					],
-					"query": [
-						{
-							"key": "Authorization",
-							"value": "Bearer {{token}}",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }
