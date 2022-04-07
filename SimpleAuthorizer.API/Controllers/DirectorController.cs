@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SimpleAuthorizer.API.Application.Directors.Commands.Create;
-using SimpleAuthorizer.API.Application.Directors.Commands.Delete;
-using SimpleAuthorizer.API.Application.Directors.Commands.Edit;
-using SimpleAuthorizer.API.Application.Directors.Queries;
-using SimpleAuthorizer.API.Application.Directors.Queries.Get;
-using SimpleAuthorizer.API.Application.Directors.Queries.List;
-using SimpleAuthorizer.Common.Web;
+using SimpleAuthorizer.API.Application.Features.Directors.Commands.Create;
+using SimpleAuthorizer.API.Application.Features.Directors.Commands.Delete;
+using SimpleAuthorizer.API.Application.Features.Directors.Commands.Edit;
+using SimpleAuthorizer.API.Application.Features.Directors.Queries;
+using SimpleAuthorizer.API.Application.Features.Directors.Queries.Get;
+using SimpleAuthorizer.API.Application.Features.Directors.Queries.List;
+using SimpleAuthorizer.Common.Controllers;
 
 namespace SimpleAuthorizer.API.Controllers
 {
@@ -19,14 +19,14 @@ namespace SimpleAuthorizer.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [Route("{id:int}")]
-        public async Task<ActionResult<DirectorQueryOutputModel>> Get(
+        public async Task<ActionResult<DirectorCommonOutputModel>> Get(
                 [FromRoute] GetDirectorQuery query)
                 => await this.Send(query);
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<List<DirectorQueryOutputModel>>> List()
+        public async Task<ActionResult<IEnumerable<DirectorCommonOutputModel>>> List()
                 => await this.Send(new ListDirectorQuery());
 
         [HttpPost]
@@ -35,7 +35,6 @@ namespace SimpleAuthorizer.API.Controllers
         public async Task<ActionResult<int>> Create(
             [FromBody] CreateDirectorCommand command)
             => await this.Send(command);
-
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
